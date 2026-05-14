@@ -22,7 +22,7 @@ export function AboutCtaSection() {
           <Button
             className="relative w-[235px]"
             hideDefaultIcon
-            href={routes.services}
+            href={routes.bookingStart}
             variant="white"
           >
             Book Your First Session

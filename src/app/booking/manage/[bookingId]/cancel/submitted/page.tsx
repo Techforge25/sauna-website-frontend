@@ -1,23 +1,23 @@
-import { RescheduleBookingView } from "@/components/booking/reschedule-booking-view";
+import { CancellationSubmittedView } from "@/components/booking/cancellation-submitted-view";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
-type RescheduleBookingPageProps = {
+type CancellationSubmittedPageProps = {
   params: Promise<{
     bookingId: string;
   }>;
 };
 
-export default async function RescheduleBookingPage({
+export default async function CancellationSubmittedPage({
   params,
-}: RescheduleBookingPageProps) {
+}: CancellationSubmittedPageProps) {
   const { bookingId } = await params;
 
   return (
     <>
       <Navbar />
       <main>
-        <RescheduleBookingView bookingId={bookingId} />
+        <CancellationSubmittedView bookingId={bookingId} />
       </main>
       <Footer />
     </>

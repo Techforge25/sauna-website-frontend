@@ -25,7 +25,7 @@ export function ReadyRetreatSection({ className }: ReadyRetreatSectionProps) {
           </p>
         </div>
 
-        <Button href={routes.services}>Book Now</Button>
+        <Button href={routes.bookingStart}>Book Now</Button>
       </div>
     </section>
   );

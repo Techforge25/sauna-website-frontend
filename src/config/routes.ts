@@ -13,7 +13,11 @@ export const routes = {
   bookingManage: (bookingId: string) => `/booking/manage/${bookingId}`,
   bookingReschedule: (bookingId: string) =>
     `/booking/manage/${bookingId}/reschedule`,
+  bookingRescheduleConfirmation: (bookingId: string) =>
+    `/booking/manage/${bookingId}/reschedule/confirmation`,
   bookingCancel: (bookingId: string) => `/booking/manage/${bookingId}/cancel`,
+  bookingCancelSubmitted: (bookingId: string) =>
+    `/booking/manage/${bookingId}/cancel/submitted`,
   gallery: "/gallery",
   contact: "/contact",
   privacyPolicy: "/privacy-policy",

@@ -1,5 +1,5 @@
-import { BookingRoutePlaceholder } from "@/components/booking/booking-route-placeholder";
+import { redirect } from "next/navigation";
 
 export default function ManageBookingPage() {
-  return <BookingRoutePlaceholder title="Manage Booking" />;
+  redirect("/booking/my-bookings");
 }

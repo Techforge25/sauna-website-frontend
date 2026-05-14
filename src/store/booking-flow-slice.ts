@@ -5,14 +5,17 @@ import type { PaymentProvider } from "@/types";
 
 export type BookingStep = "service" | "date-time" | "checkout" | "success";
 
-type BookingFlowState = {
-  currentStep: BookingStep;
-  customer: BookingAccessInput | null;
+export type BookingDraftState = {
   paymentProvider: PaymentProvider | null;
   peopleCount: number;
   selectedDate: string | null;
   selectedServiceId: string | null;
   selectedSlotId: string | null;
+};
+
+type BookingFlowState = BookingDraftState & {
+  currentStep: BookingStep;
+  customer: BookingAccessInput | null;
 };
 
 const initialState: BookingFlowState = {
@@ -29,6 +32,30 @@ const bookingFlowSlice = createSlice({
   initialState,
   name: "bookingFlow",
   reducers: {
+    hydrateBookingDraft: (
+      state,
+      action: PayloadAction<Partial<BookingDraftState>>,
+    ) => {
+      if (action.payload.paymentProvider !== undefined) {
+        state.paymentProvider = action.payload.paymentProvider;
+      }
+
+      if (typeof action.payload.peopleCount === "number") {
+        state.peopleCount = Math.max(1, action.payload.peopleCount);
+      }
+
+      if (action.payload.selectedDate !== undefined) {
+        state.selectedDate = action.payload.selectedDate;
+      }
+
+      if (action.payload.selectedServiceId !== undefined) {
+        state.selectedServiceId = action.payload.selectedServiceId;
+      }
+
+      if (action.payload.selectedSlotId !== undefined) {
+        state.selectedSlotId = action.payload.selectedSlotId;
+      }
+    },
     resetBookingFlow: () => initialState,
     setCurrentStep: (state, action: PayloadAction<BookingStep>) => {
       state.currentStep = action.payload;
@@ -61,6 +88,7 @@ const bookingFlowSlice = createSlice({
 });
 
 export const {
+  hydrateBookingDraft,
   resetBookingFlow,
   setCurrentStep,
   setCustomer,

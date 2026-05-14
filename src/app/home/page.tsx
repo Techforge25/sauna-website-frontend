@@ -19,7 +19,7 @@ export default function HomePage() {
         <PageHero
           contentClassName="items-end pb-[60px] lg:items-end lg:pt-0"
           action={{
-            href: routes.services,
+            href: routes.bookingStart,
             label: "Book Now",
           }}
           description="Experience 50 minutes of pure detox and relaxation. No sign-ups, no accounts just instant peace."

@@ -7,7 +7,14 @@ import { HiArrowLeft, HiArrowRight, HiChevronLeft, HiChevronRight } from "react-
 import { BookingStepper } from "@/components/booking/booking-stepper";
 import { env } from "@/config/env";
 import { routes } from "@/config/routes";
-import { useTimeSlots } from "@/hooks";
+import { useBookingDraftStorage, useTimeSlots } from "@/hooks";
+import {
+  calendarDays,
+  defaultSelectedDate,
+  formatSlashDate,
+  weekdays,
+} from "@/lib/booking/booking-calendar-data";
+import { mockTimeSlots } from "@/lib/booking/mock-booking-data";
 import { cn } from "@/lib/utils/cn";
 import {
   setCurrentStep,
@@ -16,67 +23,6 @@ import {
 } from "@/store/booking-flow-slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import type { TimeSlot } from "@/types";
-
-type CalendarDay = {
-  date: string;
-  day: number;
-  isAvailable: boolean;
-};
-
-const weekdays = ["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"];
-const defaultSelectedDate = "2026-05-12";
-
-const calendarDays: CalendarDay[] = [
-  { date: "2026-05-01", day: 1, isAvailable: false },
-  { date: "2026-05-02", day: 2, isAvailable: true },
-  { date: "2026-05-03", day: 3, isAvailable: false },
-  { date: "2026-05-04", day: 4, isAvailable: false },
-  { date: "2026-05-05", day: 5, isAvailable: true },
-  { date: "2026-05-06", day: 6, isAvailable: true },
-  { date: "2026-05-07", day: 7, isAvailable: true },
-  { date: "2026-05-08", day: 8, isAvailable: false },
-  { date: "2026-05-09", day: 9, isAvailable: true },
-  { date: "2026-05-10", day: 10, isAvailable: true },
-  { date: "2026-05-11", day: 11, isAvailable: true },
-  { date: "2026-05-12", day: 12, isAvailable: true },
-  { date: "2026-05-13", day: 13, isAvailable: false },
-  { date: "2026-05-14", day: 14, isAvailable: false },
-  { date: "2026-05-15", day: 15, isAvailable: false },
-  { date: "2026-05-16", day: 16, isAvailable: false },
-  { date: "2026-05-17", day: 17, isAvailable: false },
-  { date: "2026-05-18", day: 18, isAvailable: true },
-  { date: "2026-05-19", day: 19, isAvailable: true },
-  { date: "2026-05-20", day: 20, isAvailable: true },
-  { date: "2026-05-21", day: 21, isAvailable: false },
-  { date: "2026-05-22", day: 22, isAvailable: true },
-  { date: "2026-05-23", day: 23, isAvailable: false },
-  { date: "2026-05-24", day: 24, isAvailable: true },
-  { date: "2026-05-25", day: 25, isAvailable: false },
-  { date: "2026-05-26", day: 26, isAvailable: true },
-  { date: "2026-05-27", day: 27, isAvailable: false },
-  { date: "2026-05-28", day: 28, isAvailable: true },
-  { date: "2026-05-29", day: 29, isAvailable: false },
-  { date: "2026-05-30", day: 30, isAvailable: true },
-  { date: "2026-05-31", day: 31, isAvailable: true },
-];
-
-const mockTimeSlots: TimeSlot[] = [
-  { endTime: "08:50", id: "08-00", isAvailable: true, startTime: "08:00" },
-  { endTime: "09:50", id: "09-00", isAvailable: true, startTime: "09:00" },
-  { endTime: "10:50", id: "10-00", isAvailable: true, startTime: "10:00" },
-  { endTime: "12:50", id: "12-00", isAvailable: true, startTime: "12:00" },
-  { endTime: "13:50", id: "13-00", isAvailable: true, startTime: "13:00" },
-  { endTime: "14:50", id: "14-00", isAvailable: false, startTime: "14:00" },
-  { endTime: "15:50", id: "15-00", isAvailable: false, startTime: "15:00" },
-  { endTime: "16:50", id: "16-00", isAvailable: true, startTime: "16:00" },
-  { endTime: "17:50", id: "17-00", isAvailable: true, startTime: "17:00" },
-];
-
-function formatSelectedDate(date: string) {
-  const [year, month, day] = date.split("-");
-
-  return `${day}/${month}/${year}`;
-}
 
 export function DateTimeSelectionView() {
   const dispatch = useAppDispatch();
@@ -91,6 +37,7 @@ export function DateTimeSelectionView() {
   const selectedSlotId = useAppSelector(
     (state) => state.bookingFlow.selectedSlotId,
   );
+  const isDraftRestored = useBookingDraftStorage();
   const activeDate = selectedDate ?? defaultSelectedDate;
   const shouldFetchSlots = !env.enableApiMocks;
   const timeSlotsQuery = useTimeSlots(
@@ -109,6 +56,10 @@ export function DateTimeSelectionView() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!isDraftRestored) {
+      return;
+    }
+
     if (env.enableApiMocks && !customer) {
       router.replace(routes.bookingStart);
       return;
@@ -117,19 +68,27 @@ export function DateTimeSelectionView() {
     if (!selectedServiceId) {
       router.replace(routes.bookingNewService);
     }
-  }, [customer, router, selectedServiceId]);
+  }, [customer, isDraftRestored, router, selectedServiceId]);
 
   useEffect(() => {
+    if (!isDraftRestored) {
+      return;
+    }
+
     if (!selectedDate) {
       dispatch(setSelectedDate(defaultSelectedDate));
     }
-  }, [dispatch, selectedDate]);
+  }, [dispatch, isDraftRestored, selectedDate]);
 
   useEffect(() => {
+    if (!isDraftRestored) {
+      return;
+    }
+
     if (!selectedSlotId && activeSlotId) {
       dispatch(setSelectedSlotId(activeSlotId));
     }
-  }, [activeSlotId, dispatch, selectedSlotId]);
+  }, [activeSlotId, dispatch, isDraftRestored, selectedSlotId]);
 
   function handleBack() {
     if (window.history.length > 1) {
@@ -150,7 +109,11 @@ export function DateTimeSelectionView() {
     router.push(routes.bookingNewCheckout);
   }
 
-  if ((env.enableApiMocks && !customer) || !selectedServiceId) {
+  if (
+    !isDraftRestored ||
+    (env.enableApiMocks && !customer) ||
+    !selectedServiceId
+  ) {
     return null;
   }
 
@@ -289,7 +252,7 @@ function TimeSlotsPanel({
   return (
     <div className="flex min-h-[430px] flex-col gap-8 rounded-[16px] border border-[#d8dee8] bg-white p-6 shadow-[0px_1px_1px_rgba(0,0,0,0.05)] sm:p-8">
       <h2 className="font-serif text-[22px] font-semibold leading-7 text-foreground">
-        {formatSelectedDate(selectedDate)}
+        {formatSlashDate(selectedDate)}
       </h2>
 
       {isLoading ? (

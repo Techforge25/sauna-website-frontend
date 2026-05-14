@@ -1,5 +1,25 @@
-import { BookingRoutePlaceholder } from "@/components/booking/booking-route-placeholder";
+import { CancelBookingRequestView } from "@/components/booking/cancel-booking-request-view";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 
-export default function CancelBookingPage() {
-  return <BookingRoutePlaceholder title="Cancel Booking" />;
+type CancelBookingPageProps = {
+  params: Promise<{
+    bookingId: string;
+  }>;
+};
+
+export default async function CancelBookingPage({
+  params,
+}: CancelBookingPageProps) {
+  const { bookingId } = await params;
+
+  return (
+    <>
+      <Navbar />
+      <main>
+        <CancelBookingRequestView bookingId={bookingId} />
+      </main>
+      <Footer />
+    </>
+  );
 }

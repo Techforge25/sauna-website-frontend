@@ -78,9 +78,9 @@ export function BookingStepper({
                   className={cn(
                     "flex size-12 items-center justify-center rounded-full font-serif text-lg font-medium leading-[26px]",
                     isActive &&
-                      "border-4 border-[rgba(255,255,255,0.8)] bg-[linear-gradient(180deg,#FAE20F_31.11%,#F84906_111.11%)] text-white",
+                      "border-4 border-[rgba(255,255,255,0.8)] bg-[linear-gradient(180deg,#FAE20F_11.11%,#F84906_111.11%)] text-white",
                     isCompleted &&
-                      "border-4 border-[rgba(255,255,255,0.8)] bg-[linear-gradient(180deg,#FAE20F_31.11%,#F84906_111.11%)] text-white",
+                      "border-4 border-[rgba(255,255,255,0.8)] bg-[linear-gradient(180deg,#FAE20F_11.11%,#F84906_111.11%)] text-white",
                     !isActive &&
                       !isCompleted &&
                       "border border-border bg-white text-[#111827]",

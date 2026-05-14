@@ -7,7 +7,8 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 import { BookingStepper } from "@/components/booking/booking-stepper";
 import { env } from "@/config/env";
 import { routes } from "@/config/routes";
-import { useServices } from "@/hooks";
+import { useBookingDraftStorage, useServices } from "@/hooks";
+import { formatCurrency, mockServices } from "@/lib/booking/mock-booking-data";
 import { cn } from "@/lib/utils/cn";
 import {
   setCurrentStep,
@@ -16,46 +17,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import type { Service } from "@/types";
 
-const bookingTermsCopy =
-  "By proceeding with this booking you accept our terms of service. Links to terms of service and privacy policy can be accessed at the bottom of the page.";
-
-const mockServices: Service[] = [
-  {
-    currency: "EUR",
-    description: bookingTermsCopy,
-    durationMinutes: 50,
-    id: "shared-50",
-    imageUrl: "",
-    isActive: true,
-    priceCents: 1600,
-    priceUnit: "session",
-    slug: "50-mins-shared-session",
-    sortOrder: 1,
-    title: "50 Mins Shared Session",
-  },
-  {
-    currency: "EUR",
-    description: bookingTermsCopy,
-    durationMinutes: 50,
-    id: "private-50",
-    imageUrl: "",
-    isActive: true,
-    priceCents: 13900,
-    priceUnit: "session",
-    slug: "50-min-private-sauna-session",
-    sortOrder: 2,
-    title: "50 Min Private Sauna Session",
-  },
-];
-
-function formatPrice(priceCents: number) {
-  return new Intl.NumberFormat("en-IE", {
-    currency: "EUR",
-    minimumFractionDigits: 2,
-    style: "currency",
-  }).format(priceCents / 100);
-}
-
 export function ServiceSelectionView() {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -63,6 +24,7 @@ export function ServiceSelectionView() {
   const selectedServiceId = useAppSelector(
     (state) => state.bookingFlow.selectedServiceId,
   );
+  const isDraftRestored = useBookingDraftStorage();
   const shouldFetchServices = !env.enableApiMocks;
   const servicesQuery = useServices(shouldFetchServices);
   const services = useMemo(
@@ -79,16 +41,24 @@ export function ServiceSelectionView() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!isDraftRestored) {
+      return;
+    }
+
     if (env.enableApiMocks && !customer) {
       router.replace(routes.bookingStart);
     }
-  }, [customer, router]);
+  }, [customer, isDraftRestored, router]);
 
   useEffect(() => {
+    if (!isDraftRestored) {
+      return;
+    }
+
     if (!selectedServiceId && services[0]) {
       dispatch(setSelectedServiceId(services[0].id));
     }
-  }, [dispatch, selectedServiceId, services]);
+  }, [dispatch, isDraftRestored, selectedServiceId, services]);
 
   function handleBack() {
     if (window.history.length > 1) {
@@ -108,7 +78,7 @@ export function ServiceSelectionView() {
     router.push(routes.bookingNewDateTime);
   }
 
-  if (env.enableApiMocks && !customer) {
+  if (!isDraftRestored || (env.enableApiMocks && !customer)) {
     return null;
   }
 
@@ -203,7 +173,7 @@ function ServiceSelectionCard({
 
           <div className="flex items-center gap-1 capitalize">
             <span className={cn("text-[28px] font-bold leading-9", priceColor)}>
-              {formatPrice(service.priceCents)}
+              {formatCurrency(service.priceCents)}
             </span>
             <span className={cn("text-base leading-9", priceUnitColor)}>
               /{service.priceUnit}
