@@ -229,8 +229,8 @@ export function VerifyOtpForm() {
                   className={cn(
                     "h-16 w-[46px] rounded-lg border bg-white text-center text-[32px] font-semibold leading-none tracking-[-0.01125em] text-[#251913] outline-none transition-colors sm:w-[60px]",
                     digit
-                      ? "border-[#fae20f]"
-                      : "border-border focus:border-[#fae20f]",
+                      ? "border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(180deg,#FAE20F_-61.11%,#F84906_111.11%)_border-box]"
+                      : "border-border focus:border-transparent focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(180deg,#FAE20F_-61.11%,#F84906_111.11%)_border-box]",
                   )}
                   inputMode="numeric"
                   key={index}

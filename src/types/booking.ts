@@ -60,8 +60,10 @@ export type Booking = {
 export type BookingSummary = {
   accessCode?: string;
   date: string;
+  durationMinutes?: number;
   id: string;
   serviceName: string;
+  serviceType?: SaunaService["serviceType"];
   status: BookingStatus;
   timeRange: string;
   totalPriceCents?: number;

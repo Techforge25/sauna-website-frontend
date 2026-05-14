@@ -1,5 +1,15 @@
-import { BookingRoutePlaceholder } from "@/components/booking/booking-route-placeholder";
+import { ServiceSelectionView } from "@/components/booking/service-selection-view";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 
 export default function NewBookingServicePage() {
-  return <BookingRoutePlaceholder title="Select Service" />;
+  return (
+    <>
+      <Navbar />
+      <main>
+        <ServiceSelectionView />
+      </main>
+      <Footer />
+    </>
+  );
 }
