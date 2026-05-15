@@ -91,7 +91,7 @@ function ServiceCard({ service }: ServiceCardProps) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
+            <h2 className="font-serif text-[22px] font-medium capitalize leading-9 text-foreground">
               {service.title}
             </h2>
             <DurationBadge minutes={service.durationMinutes} />
@@ -100,7 +100,7 @@ function ServiceCard({ service }: ServiceCardProps) {
           <div className="flex items-center gap-1 capitalize">
             <span
               className={cn(
-                "text-[28px] font-bold leading-9",
+                "text-[28px] font-semibold leading-9",
                 service.priceCents >= 10000 ? "text-primary-dark" : "text-primary",
               )}
             >
@@ -129,7 +129,7 @@ type DurationBadgeProps = {
 
 function DurationBadge({ minutes }: DurationBadgeProps) {
   return (
-    <span className="inline-flex h-7 shrink-0 items-center justify-center rounded-pill border border-primary-light bg-primary/4 px-[11px] text-base font-semibold lowercase leading-[22px] tracking-[0.12em] text-primary">
+    <span className="inline-flex h-7 shrink-0 items-center justify-center rounded-pill border border-primary-light bg-primary/4 px-[11px] text-base font-medium lowercase leading-[22px] tracking-[0.12em] text-primary">
       {minutes}m
     </span>
   );
