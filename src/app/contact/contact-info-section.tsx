@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 const contactCards = [
   {
     title: "Email Us",
-    value: "concierge@bmsaunas.com",
+    value: "help@bmsaunas.com",
     icon: HiEnvelope,
   },
   {

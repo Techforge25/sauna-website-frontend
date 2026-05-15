@@ -159,7 +159,7 @@ export function CancelBookingRequestView({
                   <Input
                     className={fieldClassName}
                     error={errors.accountHolderName?.message}
-                    label="Account Holder Name"
+                    label="Account Holder Name*"
                     {...register("accountHolderName")}
                   />
 
@@ -167,13 +167,13 @@ export function CancelBookingRequestView({
                     <Input
                       className={fieldClassName}
                       error={errors.bankName?.message}
-                      label="Bank Name"
+                      label="Bank Name*"
                       {...register("bankName")}
                     />
                     <Input
                       className={fieldClassName}
                       error={errors.accountNumber?.message}
-                      label="IBAN / Account No."
+                      label="IBAN / Account No.*"
                       {...register("accountNumber")}
                     />
                   </div>
