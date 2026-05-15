@@ -17,6 +17,7 @@ const services: Service[] = [
       "Please note: Loyalty points are limited to one per booking, regardless of the number of guests. By proceeding, you agree to our Terms of Service and Privacy Policy. For more details, please review our full terms and conditions via the links at the bottom of this page.",
     imageUrl: "/Images/booking/shared-session.png",
     isActive: true,
+    serviceType: "shared",
     sortOrder: 1,
   },
   {
@@ -31,6 +32,7 @@ const services: Service[] = [
       "By proceeding with this booking you accept our terms of service. Links to terms of service and privacy policy can be accessed at the bottom of the page.",
     imageUrl: "/Images/booking/private-session.png",
     isActive: true,
+    serviceType: "private",
     sortOrder: 2,
   },
 ] as const;
@@ -83,6 +85,7 @@ function ServiceCard({ service }: ServiceCardProps) {
           sizes="(min-width: 1024px) 449px, 100vw"
           src={service.imageUrl}
         />
+        <ServiceTypeBadge serviceType={service.serviceType} />
       </div>
 
       <div className="flex flex-col gap-4">
@@ -130,6 +133,22 @@ function DurationBadge({ minutes }: DurationBadgeProps) {
       {minutes}m
     </span>
   );
+}
+
+function ServiceTypeBadge({
+  serviceType,
+}: {
+  serviceType: Service["serviceType"];
+}) {
+  return (
+    <span className="absolute right-3 top-3 inline-flex h-[24px] items-center justify-center rounded-pill border border-white px-3 text-xs font-medium capitalize leading-none text-white shadow-[0px_4px_12px_rgba(0,0,0,0.18)]">
+      {formatServiceType(serviceType)}
+    </span>
+  );
+}
+
+function formatServiceType(serviceType: Service["serviceType"]) {
+  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function formatServicePrice(service: Service) {

@@ -9,21 +9,21 @@ import { GradientText, SectionHeading } from "@/components/ui/section-heading";
 const valueCards = [
   {
     description:
-      "Wellness is personal. We believe in eliminating shared spaces to provide you with a distraction-free, private environment for true recovery.",
+      "Exclusive 50 minute access to our premium sauna for total privacy and relaxation.",
     icon: HiLockClosed,
-    title: "Privacy First",
+    title: "Private Sessions",
   },
   {
     description:
-      "Our heaters utilize precision climate control to maintain optimal therapeutic temperatures without the humidity spikes",
+      "Join a communal 50-minute wellness session, perfect for meeting fellow sauna lovers.",
     icon: HiSignal,
-    title: "Engineering Excellence",
+    title: "Shared Sessions",
   },
   {
     description:
-      "A designated space for digital detox. We design our cabins to be sanctuary spaces where the outside world fades into the background.",
+      "Rejuvenate your body with contrast therapy in our ice-cold recovery plunge pool.",
     icon: HiSparkles,
-    title: "Mental Well-Being",
+    title: "Cold Plunge Pool",
   },
 ] as const;
 

@@ -56,6 +56,14 @@ const bookingFlowSlice = createSlice({
         state.selectedSlotId = action.payload.selectedSlotId;
       }
     },
+    clearBookingDraftState: (state) => {
+      state.currentStep = "service";
+      state.paymentProvider = null;
+      state.peopleCount = 1;
+      state.selectedDate = null;
+      state.selectedServiceId = null;
+      state.selectedSlotId = null;
+    },
     resetBookingFlow: () => initialState,
     setCurrentStep: (state, action: PayloadAction<BookingStep>) => {
       state.currentStep = action.payload;
@@ -88,6 +96,7 @@ const bookingFlowSlice = createSlice({
 });
 
 export const {
+  clearBookingDraftState,
   hydrateBookingDraft,
   resetBookingFlow,
   setCurrentStep,

@@ -21,6 +21,11 @@ const comparisonRows = [
     publicSaunas: "Membership Required",
   },
   {
+    feature: "Ice Cold Plunge",
+    bm: "Included in Every Session",
+    publicSaunas: "Rarely Available / Extra Cost",
+  },
+  {
     feature: "Entry",
     bm: "Secure Digital Code",
     publicSaunas: "Staff / Reception Desk",

@@ -5,14 +5,14 @@ import { GradientText, SectionBadge, SectionHeading } from "@/components/ui";
 
 const cedarFeatures = [
   {
-    title: "Low-EMF Infrared Heaters",
+    title: "Tailored Experiences",
     description:
-      "Medical-grade technology for deep tissue penetration without the radiation risks of standard units.",
+      "Choose between the total privacy of our individual cabins or the social energy of our shared sessions.",
   },
   {
-    title: "Smart Airflow Dynamics",
+    title: "Ice-Cold Rejuvenation",
     description:
-      "Continuous fresh air exchange ensures you breathe fresh, filtered air while maintaining constant core heat.",
+      "Every session includes access to our cold plunge pool, the essential partner to your sauna recovery.",
   },
 ] as const;
 
@@ -33,16 +33,14 @@ export function CedarTechSection() {
 
         <div className="flex w-full max-w-[647px] flex-col items-start gap-8">
           <div className="flex max-w-[560px] flex-col items-start gap-3">
-            <SectionBadge>Premium Wellness Experience</SectionBadge>
+            <SectionBadge>THE ULTIMATE RECOVERY HUB</SectionBadge>
             <SectionHeading>
-              Western Red Cedar & <GradientText>Precision Tech</GradientText>
+              Elevate Your Wellness with <GradientText>Contrast Therapy</GradientText>
             </SectionHeading>
           </div>
 
           <p className="max-w-[647px] text-lg leading-6 text-muted">
-            We don&apos;t settle for &quot;good enough.&quot; Our saunas are crafted from
-            sustainably sourced Western Red Cedar, chosen for its anti-microbial
-            properties and iconic thermal resonance.
+            Experience the perfect balance of heat and cold. At B&M Saunas, we provide a premium environment designed for deep relaxation and physical recovery. Whether you’re here for a solo session or a communal experience, our facilities are crafted to help you reset and recharge.
           </p>
 
           <div className="flex w-full flex-col gap-6">

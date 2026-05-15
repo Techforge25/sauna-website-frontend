@@ -1,4 +1,5 @@
 export type ServicePriceUnit = "session";
+export type ServiceType = "private" | "shared";
 
 export type Service = {
   id: string;
@@ -11,5 +12,6 @@ export type Service = {
   description: string;
   imageUrl: string;
   isActive: boolean;
+  serviceType: ServiceType;
   sortOrder: number;
 };

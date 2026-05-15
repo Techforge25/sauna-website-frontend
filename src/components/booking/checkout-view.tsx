@@ -219,7 +219,7 @@ export function CheckoutView() {
 
     if (env.enableApiMocks) {
       clearBookingDraft();
-      router.push(routes.bookingNewSuccess);
+      router.replace(routes.bookingNewSuccess);
       return;
     }
 
@@ -348,12 +348,17 @@ function SelectedBookingCard({
         <div className="flex w-full flex-col gap-4 rounded-[12px] border border-border p-4">
           <div className="flex flex-col gap-2">
             <div className="flex items-start justify-between gap-4">
-              <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
-                {selectedService.title}
-              </h2>
-              <span className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] text-base font-semibold lowercase leading-[22px] tracking-[0.12em] text-primary">
-                {selectedService.durationMinutes}m
-              </span>
+            <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
+              {selectedService.title}
+            </h2>
+              <div className="flex shrink-0 items-center gap-2">
+                <SelectedServiceMetaBadge>
+                  {formatServiceType(selectedService.serviceType)}
+                </SelectedServiceMetaBadge>
+                <SelectedServiceMetaBadge>
+                  {selectedService.durationMinutes}m
+                </SelectedServiceMetaBadge>
+              </div>
             </div>
 
             <div className="flex items-center gap-1 capitalize">
@@ -387,6 +392,21 @@ function SelectedBookingCard({
       </div>
     </article>
   );
+}
+
+function SelectedServiceMetaBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] font-semibold leading-[12px] tracking-[0.12em] text-primary"
+      style={{ fontSize: 12 }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function formatServiceType(serviceType: Service["serviceType"]) {
+  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function SummaryRow({

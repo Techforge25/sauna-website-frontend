@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
@@ -117,7 +118,7 @@ export function MyBookingsView() {
             Your Bookings
           </h1>
 
-          <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+          <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3">
             {myBookingsQuery.isLoading && shouldFetchBookings ? (
               <BookingLoadingCard />
             ) : null}
@@ -169,9 +170,9 @@ function BookingCard({
             <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
               {booking.serviceName}
             </h2>
-            <span className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] text-base font-semibold lowercase leading-[22px] tracking-[0.12em] text-primary">
-              {booking.durationMinutes}m
-            </span>
+            <div className="flex shrink-0 items-center gap-2">
+              <BookingMetaBadge>{booking.durationMinutes}m</BookingMetaBadge>
+            </div>
           </div>
 
           <div className="flex items-center gap-1 capitalize">
@@ -185,6 +186,22 @@ function BookingCard({
         </div>
 
         <div className="flex flex-col gap-3">
+          {booking.serviceType ? (
+            <BookingDetail
+              icon={
+                <Image
+                  alt=""
+                  aria-hidden="true"
+                  className="size-[18px]"
+                  height={18}
+                  src="/icons/join.svg"
+                  width={18}
+                />
+              }
+              label="Session"
+              value={formatServiceType(booking.serviceType)}
+            />
+          ) : null}
           <BookingDetail
             icon={<HiOutlineKey aria-hidden="true" />}
             label="Access Code"
@@ -295,6 +312,18 @@ function CancelBookingModal({
       ) : null}
     </Modal>
   );
+}
+
+function BookingMetaBadge({ children }: { children: ReactNode }) {
+  return (
+    <span className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] text-base font-semibold leading-[22px] tracking-[0.12em] text-primary">
+      {children}
+    </span>
+  );
+}
+
+function formatServiceType(serviceType: NonNullable<BookingSummary["serviceType"]>) {
+  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function BookingDetail({

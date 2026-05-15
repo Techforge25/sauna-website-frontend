@@ -144,7 +144,7 @@ function ServiceSelectionCard({
   onSelect: () => void;
   service: Service;
 }) {
-  const isPrivate = service.slug.includes("private");
+  const isPrivate = service.serviceType === "private";
   const priceColor = isPrivate ? "text-primary-dark" : "text-primary";
   const priceUnitColor = isPrivate ? "text-[#826357]" : "text-[#ff7743]";
 
@@ -166,9 +166,12 @@ function ServiceSelectionCard({
             <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
               {service.title}
             </h2>
-            <span className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] text-base font-semibold lowercase leading-[22px] tracking-[0.12em] text-primary">
-              {service.durationMinutes}m
-            </span>
+            <div className="flex shrink-0 items-center gap-2">
+              <ServiceMetaBadge>
+                {formatServiceType(service.serviceType)}
+              </ServiceMetaBadge>
+              <ServiceMetaBadge>{service.durationMinutes}m</ServiceMetaBadge>
+            </div>
           </div>
 
           <div className="flex items-center gap-1 capitalize">
@@ -187,6 +190,20 @@ function ServiceSelectionCard({
       </div>
     </button>
   );
+}
+
+function ServiceMetaBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] font-semibold leading-[12px] tracking-[0.12em] text-primary"
+    >
+      {children}
+    </span>
+  );
+}
+
+function formatServiceType(serviceType: Service["serviceType"]) {
+  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function ServiceCardSkeleton() {

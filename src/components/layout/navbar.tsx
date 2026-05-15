@@ -17,7 +17,7 @@ const navItems = [
   { href: routes.whyUs, label: "Why us" },
   { href: routes.services, label: "Services" },
   { href: routes.gallery, label: "Gallery" },
-  { href: routes.contact, label: "Contact us" },
+  // { href: routes.contact, label: "Contact us" },
 ] as const;
 
 type NavbarProps = {

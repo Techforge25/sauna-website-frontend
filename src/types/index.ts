@@ -17,4 +17,4 @@ export type {
   PaymentSession,
   PaymentStatus,
 } from "./payment";
-export type { Service, ServicePriceUnit } from "./services";
+export type { Service, ServicePriceUnit, ServiceType } from "./services";

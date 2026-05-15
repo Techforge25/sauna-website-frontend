@@ -17,6 +17,7 @@ import {
 } from "@/lib/booking/mock-booking-data";
 import { getCurrentRescheduleSlot } from "@/lib/booking/reschedule-booking-data";
 import { cn } from "@/lib/utils/cn";
+import type { ServiceType } from "@/types";
 
 type RescheduleConfirmationViewProps = {
   selectedEndTime?: string;
@@ -46,7 +47,9 @@ export function RescheduleConfirmationView({
   const endTime = selectedEndTime ?? selectedSlot.endTime;
   const newSlot = {
     dateLabel: formatDisplayDate(selectedDate),
+    durationMinutes: currentSlot.durationMinutes,
     serviceName: currentSlot.serviceName,
+    serviceType: currentSlot.serviceType,
     timeRange: `${startTime} - ${endTime}`,
   };
 
@@ -106,7 +109,9 @@ export function RescheduleConfirmationView({
               label="Old Slot"
               slot={{
                 dateLabel: currentSlot.dateLabel,
+                durationMinutes: currentSlot.durationMinutes,
                 serviceName: currentSlot.serviceName,
+                serviceType: currentSlot.serviceType,
                 timeRange: currentSlot.timeRange,
               }}
             />
@@ -149,7 +154,9 @@ function ConfirmationSlotCard({
   label: string;
   slot: {
     dateLabel: string;
+    durationMinutes: number;
     serviceName: string;
+    serviceType: ServiceType;
     timeRange: string;
   };
 }) {
@@ -160,11 +167,17 @@ function ConfirmationSlotCard({
         isHighlighted ? "border-primary" : "border-border",
       )}
     >
-      <div className="flex flex-col gap-2">
-        <p className="text-base leading-5 text-muted">{label}</p>
-        <h2 className="font-serif text-lg font-semibold capitalize leading-[29px] text-foreground">
-          {slot.serviceName}
-        </h2>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex min-w-0 flex-col gap-2">
+          <p className="text-base leading-5 text-muted">{label}</p>
+          <h2 className="font-serif text-lg font-semibold capitalize leading-[29px] text-foreground">
+            {slot.serviceName}
+          </h2>
+        </div>
+        <div className="flex shrink-0 items-center gap-3">
+          <SlotMetaBadge>{formatServiceType(slot.serviceType)}</SlotMetaBadge>
+          <SlotMetaBadge>{slot.durationMinutes}m</SlotMetaBadge>
+        </div>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -181,6 +194,21 @@ function ConfirmationSlotCard({
       </div>
     </article>
   );
+}
+
+function SlotMetaBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] font-semibold leading-4 text-primary"
+      style={{ fontSize: 12 }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function formatServiceType(serviceType: ServiceType) {
+  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function ConfirmationDetail({
