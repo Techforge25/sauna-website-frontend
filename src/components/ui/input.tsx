@@ -6,6 +6,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
   hint?: string;
   label?: string;
+  labelClassName?: string;
   leftIcon?: React.ReactNode;
   rightElement?: React.ReactNode;
   wrapperClassName?: string;
@@ -19,6 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       hint,
       id,
       label,
+      labelClassName,
       leftIcon,
       rightElement,
       wrapperClassName,
@@ -38,7 +40,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className={cn("w-full space-y-2", wrapperClassName)}>
         {label ? (
           <label
-            className="block text-sm font-medium leading-5 text-foreground"
+            className={cn(
+              "block text-sm font-medium leading-5 text-foreground",
+              labelClassName,
+            )}
             htmlFor={inputId}
           >
             {label}

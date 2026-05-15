@@ -17,11 +17,12 @@ export default function ServicesPage() {
           contentClassName="items-end pb-[60px] lg:items-end lg:px-[120px] lg:pt-0"
           description="Experience the science of heat in its most refined form."
           imageSrc="/Images/booking-hero.png"
+          showOverlay={false}
           title={
             <>
               Precision Wellness
               <br />
-              Engineering.
+              Engineering
             </>
           }
         />

@@ -17,6 +17,8 @@ export default function ContactPage() {
           contentClassName="items-end pb-[60px] lg:items-end lg:px-[120px] lg:pt-0"
           description="Have questions about our private retreats or custom builds? Our team is here to help you find your peace."
           imageSrc="/Images/contactUs-hero.png"
+          showOverlay={false}
+
           title={
             <>
               Get in Touch

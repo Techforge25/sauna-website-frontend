@@ -17,6 +17,7 @@ export default function GalleryPage() {
           contentClassName="items-end pb-[60px] lg:items-end lg:px-[120px] lg:pt-0"
           description="A glimpse into the sanctuary of precision and peace."
           imageSrc="/Images/gallery-hero.png"
+          showOverlay={false}
           title={
             <>
               The Visual Journey

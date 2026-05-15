@@ -1,4 +1,9 @@
-import Image from "next/image";
+import type { IconType } from "react-icons";
+import {
+  HiOutlineClock,
+  HiOutlineKey,
+  HiOutlineLockClosed,
+} from "react-icons/hi2";
 
 import { FeatureCard } from "@/components/ui/feature-card";
 import { SectionBadge } from "@/components/ui/section-badge";
@@ -8,16 +13,19 @@ const saunaBenefits = [
   {
     description:
       "We value your time. Book as a guest and secure your preferred slot in under 120 seconds",
+    icon: HiOutlineClock,
     title: "2-Min Booking",
   },
   {
     description:
       "Receive your private 10-digit alphanumeric gate code via email the moment you pay.",
+    icon: HiOutlineKey,
     title: "Instant Digital Access",
   },
   {
     description:
       "No crowds and no shared spaces - just you in a premium private sauna for 50 minutes",
+    icon: HiOutlineLockClosed,
     title: "Total Privacy",
   },
 ] as const;
@@ -45,9 +53,11 @@ export function WhySaunasSection() {
 
 function BenefitCard({
   description,
+  icon: Icon,
   title,
 }: {
   description: string;
+  icon: IconType;
   title: string;
 }) {
   return (
@@ -56,16 +66,7 @@ function BenefitCard({
       description={description}
       descriptionClassName="text-lg group-hover:text-white"
       icon={
-        <div className="relative size-full">
-          <Image
-            fill
-            alt=""
-            aria-hidden="true"
-            className="scale-[0.46] object-contain"
-            sizes="24px"
-            src="/Images/icons/alarm.svg"
-          />
-        </div>
+        <Icon aria-hidden="true" className="size-6 transition-colors duration-300" />
       }
       iconClassName="overflow-hidden border border-primary-light bg-[linear-gradient(214.38deg,rgba(250,226,15,0.1)_25.12%,rgba(248,73,6,0.1)_102.28%)] transition-colors duration-300 group-hover:border-white group-hover:bg-white group-hover:bg-none group-hover:shadow-[0_4px_25px_rgba(40,14,4,0.12)]"
       title={title}

@@ -18,7 +18,7 @@ export default function AboutPage() {
           contentClassName="items-end pb-[48px] lg:items-end lg:px-[120px] lg:pt-0"
           description="The story behind B&M Saunas - where engineering meets ancient wellness rituals. Discover how we redefined the modern recovery experience."
           imageSrc="/Images/aboutus-hero-fit.png"
-          // showOverlay={false}
+          showOverlay={false}
           title={
             <>
               Crafting the Ultimate

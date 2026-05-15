@@ -9,8 +9,8 @@ const stats = [
     value: "100%",
   },
   {
-    label: "Exclusive Session",
-    value: "50 Min",
+    label: "Available Slots",
+    value: "15 Daily",
   },
 ] as const;
 

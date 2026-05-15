@@ -86,7 +86,7 @@ function BookingStepCard({
     <article
       className={
         isFeatured
-          ? "overflow-hidden rounded-xl border border-primary bg-[#221916] p-[22px] text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] lg:ml-[109px] lg:max-w-[379px]"
+          ? "relative overflow-hidden rounded-xl bg-[#221916] p-[22px] text-white shadow-[0_14px_40px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-primary before:to-transparent after:pointer-events-none after:absolute after:bottom-0 after:inset-x-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary after:to-transparent lg:ml-[109px] lg:max-w-[379px]"
           : "overflow-hidden rounded-xl border-t border-primary bg-white p-[22px] text-foreground lg:ml-auto lg:max-w-[379px]"
       }
     >

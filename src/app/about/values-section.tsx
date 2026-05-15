@@ -31,10 +31,10 @@ export function ValuesSection() {
   return (
     <section className="bg-surface px-5 py-16 sm:px-8 lg:px-[120px] lg:py-[70px]">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <SectionBadge>Values</SectionBadge>
+        <div className="flex flex-col items-center gap-3 text-center w-[100%]">
+          <SectionBadge>PREMIUM WELLNESS</SectionBadge>
           <SectionHeading className="max-w-[566px]">
-            The Core Values That <GradientText>Drive Us</GradientText>
+            Everything You Need for the  <GradientText>Ultimate Recovery</GradientText>
           </SectionHeading>
         </div>
 

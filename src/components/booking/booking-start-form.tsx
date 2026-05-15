@@ -132,6 +132,7 @@ export function BookingStartForm() {
                 error={errors[field.name]?.message}
                 key={field.name}
                 label={field.label}
+                labelClassName="font-medium"
                 placeholder={field.placeholder}
                 type={field.type}
                 {...register(field.name)}
@@ -142,6 +143,7 @@ export function BookingStartForm() {
               className={fieldClassName}
               error={errors.email?.message}
               label="Email*"
+              labelClassName="font-medium"
               placeholder="Enter your Email"
               type="email"
               {...register("email")}

@@ -98,7 +98,7 @@ function FaqItem({
         onClick={onToggle}
         type="button"
       >
-        <span className="text-lg font-medium leading-[1.6] text-[#282628]">
+        <span className="text-lg font-semibold leading-[1.6] text-[#282628]">
           {question}
         </span>
         <span className="flex size-6 shrink-0 items-center justify-center text-2xl leading-none text-[#0d1221]">

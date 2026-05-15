@@ -37,7 +37,7 @@ const paymentMethods = [
     alt: "Revolut",
     height: 33,
     src: "/Images/payment/revolut.svg",
-    width: 104,
+    width: 82,
   },
 ] as const;
 
@@ -117,7 +117,7 @@ function PaymentMethods() {
         {paymentMethods.map((method) => (
           <Image
             alt={method.alt}
-            className="h-[33px] w-auto rounded-sm border border-border bg-white object-contain"
+            className="h-[33px] w-auto rounded-sm border border-border px-3 bg-white object-contain"
             height={method.height}
             key={method.alt}
             src={method.src}

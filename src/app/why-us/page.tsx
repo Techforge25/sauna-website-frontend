@@ -19,6 +19,7 @@ export default function WhyUsPage() {
           contentClassName="items-end pb-[60px] lg:items-end lg:px-[120px] lg:pt-0"
           description="B&M Saunas redefines the traditional heat ritual through a lens of modern engineering. We prioritize your time, your privacy, and the absolute purity of the experience."
           imageSrc="/Images/whyUs-section.png"
+          showOverlay={false}
           title={
             <>
               The Future of Wellness
