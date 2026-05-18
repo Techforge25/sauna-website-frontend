@@ -5,6 +5,10 @@ import { useEffect, useMemo } from "react";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 
 import { BookingStepper } from "@/components/booking/booking-stepper";
+import {
+  formatServiceType,
+  ServiceMetaBadge,
+} from "@/components/booking/service-meta-badge";
 import { env } from "@/config/env";
 import { routes } from "@/config/routes";
 import { useBookingDraftStorage, useServices } from "@/hooks";
@@ -190,20 +194,6 @@ function ServiceSelectionCard({
       </div>
     </button>
   );
-}
-
-function ServiceMetaBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] font-semibold leading-[12px] tracking-[0.12em] text-primary"
-    >
-      {children}
-    </span>
-  );
-}
-
-function formatServiceType(serviceType: Service["serviceType"]) {
-  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
 }
 
 function ServiceCardSkeleton() {

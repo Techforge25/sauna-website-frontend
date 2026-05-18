@@ -23,14 +23,25 @@
       rgba(255, 255, 255, 0.2) 1.95%,
       rgba(255, 255, 255, 0) 65.42%
     ),
-    linear-gradient(182deg, rgba(255, 255, 255, 0.20) 1.95%, rgba(255, 255, 255, 0.00) 65.42%), linear-gradient(270deg, #FAE20F -140.19%, #F84906 101.55%);
+    linear-gradient(
+      182deg,
+      rgba(255, 255, 255, 0.2) 1.95%,
+      rgba(255, 255, 255, 0) 65.42%
+    ),
+    linear-gradient(270deg, #fae20f -140.19%, #f84906 101.55%);
   --gradient-button-hover:
     linear-gradient(
       180.74deg,
       rgba(255, 255, 255, 0.2) 1.95%,
       rgba(255, 255, 255, 0) 65.42%
     ),
-    linear-gradient(182deg, rgba(255, 255, 255, 0.20) 1.95%, rgba(255, 255, 255, 0.00) 65.42%), linear-gradient(269deg, #F84906 -5.91%, #FAE20F 191.82%);  --gradient-primary-soft: linear-gradient(
+    linear-gradient(
+      182deg,
+      rgba(255, 255, 255, 0.2) 1.95%,
+      rgba(255, 255, 255, 0) 65.42%
+    ),
+    linear-gradient(269deg, #f84906 -5.91%, #fae20f 191.82%);
+  --gradient-primary-soft: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.2) 0%,
     rgba(255, 255, 255, 0) 65%
@@ -114,6 +125,27 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+button,
+a,
+[role="button"],
+label,
+select,
+summary,
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"],
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
 }
 
 @keyframes keyword-marquee {

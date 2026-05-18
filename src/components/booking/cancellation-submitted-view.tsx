@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { HiArrowDownTray, HiArrowLeft } from "react-icons/hi2";
+import { useEffect } from "react";
+import { HiArrowDownTray } from "react-icons/hi2";
 
 import { Button } from "@/components/ui/button";
 import { routes } from "@/config/routes";
@@ -36,14 +37,19 @@ export function CancellationSubmittedView({
   const router = useRouter();
   void bookingId;
 
-  function handleBack() {
-    if (window.history.length > 1) {
-      router.back();
-      return;
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+
+    function handleBrowserBack() {
+      router.replace(routes.bookingMyBookings);
     }
 
-    router.push(routes.bookingMyBookings);
-  }
+    window.addEventListener("popstate", handleBrowserBack);
+
+    return () => {
+      window.removeEventListener("popstate", handleBrowserBack);
+    };
+  }, [router]);
 
   function handleDownloadReceipt() {
     // Backend will provide the generated PDF URL in the final integration.
@@ -52,15 +58,6 @@ export function CancellationSubmittedView({
   return (
     <section className="bg-background px-5 pb-[100px] pt-8 sm:px-8 lg:px-[120px]">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start gap-[62px]">
-        <button
-          className="inline-flex items-center gap-2 text-sm leading-6 text-black transition-colors hover:text-primary"
-          onClick={handleBack}
-          type="button"
-        >
-          <HiArrowLeft aria-hidden="true" className="size-5" />
-          Back
-        </button>
-
         <div className="flex w-full flex-col gap-8">
           <h1 className="font-serif text-[32px] font-medium leading-tight text-foreground sm:text-[36px] sm:leading-[62px]">
             Cancellation Request Submitted
@@ -128,6 +125,7 @@ export function CancellationSubmittedView({
                 fullWidth
                 hideDefaultIcon
                 href={routes.bookingMyBookings}
+                replace
                 variant="outline"
               >
                 Go Back

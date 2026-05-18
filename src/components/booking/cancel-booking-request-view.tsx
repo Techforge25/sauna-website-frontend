@@ -94,7 +94,7 @@ export function CancelBookingRequestView({
         });
       }
 
-      router.push(routes.bookingCancelSubmitted(bookingId));
+      router.replace(routes.bookingCancelSubmitted(bookingId));
     } catch (error) {
       const message =
         isAxiosError(error) && typeof error.response?.data?.message === "string"

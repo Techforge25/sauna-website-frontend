@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
 import {
-  HiArrowLeft,
   HiArrowRight,
   HiCheck,
   HiOutlineCalendarDays,
@@ -88,15 +87,6 @@ export function MyBookingsView() {
     }
   }, [customer, router]);
 
-  function handleBack() {
-    if (window.history.length > 1) {
-      router.back();
-      return;
-    }
-
-    router.push(routes.bookingStart);
-  }
-
   if (env.enableApiMocks && !customer) {
     return null;
   }
@@ -104,15 +94,6 @@ export function MyBookingsView() {
   return (
     <section className="bg-background px-5 pb-[100px] pt-8 sm:px-8 lg:px-[120px]">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start gap-[52px]">
-        <button
-          className="inline-flex items-center gap-2 text-sm leading-6 text-black transition-colors hover:text-primary"
-          onClick={handleBack}
-          type="button"
-        >
-          <HiArrowLeft aria-hidden="true" className="size-5" />
-          Back
-        </button>
-
         <div className="flex w-full flex-col items-start gap-8">
           <h1 className="font-serif text-[36px] font-medium leading-[46px] text-foreground">
             Your Bookings

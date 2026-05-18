@@ -40,8 +40,10 @@ export function RescheduleBookingView({
   const shouldUseApi = !env.enableApiMocks;
   const bookingQuery = useBooking(bookingId, shouldUseApi);
   const booking = bookingQuery.data;
-  const currentSlot = getCurrentRescheduleSlot(booking);
-  const serviceId = shouldUseApi ? (booking?.service.id ?? "") : currentSlot.serviceId;
+  const currentSlot = getCurrentRescheduleSlot(booking, bookingId);
+  const serviceId = shouldUseApi
+    ? (booking?.service.id ?? "")
+    : currentSlot.serviceId;
   const timeSlotsQuery = useTimeSlots(
     { date: selectedDate, serviceId },
     shouldUseApi && Boolean(serviceId),

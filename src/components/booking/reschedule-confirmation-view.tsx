@@ -38,7 +38,7 @@ export function RescheduleConfirmationView({
   const shouldUseApi = !env.enableApiMocks;
   const bookingQuery = useBooking(bookingId, shouldUseApi);
   const rescheduleBooking = useRescheduleBooking();
-  const currentSlot = getCurrentRescheduleSlot(bookingQuery.data);
+  const currentSlot = getCurrentRescheduleSlot(bookingQuery.data, bookingId);
   const selectedSlot =
     mockTimeSlots.find((slot) => slot.id === selectedSlotId) ??
     mockTimeSlots.find((slot) => slot.isAvailable) ??

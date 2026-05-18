@@ -122,7 +122,7 @@ export function BookingStartForm() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="font-serif text-[32px] font-medium leading-[46px] text-foreground">
-            Fill Your Information
+            Fill in Your information
           </h1>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">

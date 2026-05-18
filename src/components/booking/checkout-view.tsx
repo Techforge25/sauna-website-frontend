@@ -13,6 +13,10 @@ import {
 } from "react-icons/hi2";
 
 import { BookingStepper } from "@/components/booking/booking-stepper";
+import {
+  formatServiceType,
+  ServiceMetaBadge,
+} from "@/components/booking/service-meta-badge";
 import { env } from "@/config/env";
 import { routes } from "@/config/routes";
 import {
@@ -84,7 +88,8 @@ const paymentOptions: PaymentOption[] = [
 ];
 
 function getApiErrorMessage(error: unknown, fallback: string) {
-  return isAxiosError(error) && typeof error.response?.data?.message === "string"
+  return isAxiosError(error) &&
+    typeof error.response?.data?.message === "string"
     ? error.response.data.message
     : fallback;
 }
@@ -239,7 +244,10 @@ export function CheckoutView() {
       window.location.href = paymentSession.redirectUrl;
     } catch (error) {
       setFormError(
-        getApiErrorMessage(error, "Unable to start checkout. Please try again."),
+        getApiErrorMessage(
+          error,
+          "Unable to start checkout. Please try again.",
+        ),
       );
     }
   }
@@ -348,16 +356,16 @@ function SelectedBookingCard({
         <div className="flex w-full flex-col gap-4 rounded-[12px] border border-border p-4">
           <div className="flex flex-col gap-2">
             <div className="flex items-start justify-between gap-4">
-            <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
-              {selectedService.title}
-            </h2>
+              <h2 className="font-serif text-[22px] font-semibold capitalize leading-9 text-foreground">
+                {selectedService.title}
+              </h2>
               <div className="flex shrink-0 items-center gap-2">
-                <SelectedServiceMetaBadge>
+                <ServiceMetaBadge>
                   {formatServiceType(selectedService.serviceType)}
-                </SelectedServiceMetaBadge>
-                <SelectedServiceMetaBadge>
+                </ServiceMetaBadge>
+                <ServiceMetaBadge>
                   {selectedService.durationMinutes}m
-                </SelectedServiceMetaBadge>
+                </ServiceMetaBadge>
               </div>
             </div>
 
@@ -394,21 +402,6 @@ function SelectedBookingCard({
   );
 }
 
-function SelectedServiceMetaBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="flex h-7 shrink-0 items-center justify-center rounded-pill border border-[#feede6] bg-[rgba(248,73,6,0.04)] px-[11px] font-semibold leading-[12px] tracking-[0.12em] text-primary"
-      style={{ fontSize: 12 }}
-    >
-      {children}
-    </span>
-  );
-}
-
-function formatServiceType(serviceType: Service["serviceType"]) {
-  return serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
-}
-
 function SummaryRow({
   icon,
   label,
@@ -426,7 +419,9 @@ function SummaryRow({
         </span>
         <span>{label}</span>
       </div>
-      <span className="shrink-0 whitespace-nowrap text-foreground">{value}</span>
+      <span className="shrink-0 whitespace-nowrap text-foreground">
+        {value}
+      </span>
     </div>
   );
 }
@@ -455,7 +450,9 @@ function PeopleCountCard({
             type="checkbox"
           />
           <span className="flex size-6 items-center justify-center border border-border text-primary peer-checked:border-primary">
-            {bringPeople ? <HiCheck aria-hidden="true" className="size-4" /> : null}
+            {bringPeople ? (
+              <HiCheck aria-hidden="true" className="size-4" />
+            ) : null}
           </span>
           <span className="text-sm capitalize leading-[19px] text-muted">
             Bring People With Me

@@ -3,6 +3,8 @@ export const routes = {
   about: "/about",
   whyUs: "/why-us",
   services: "/services",
+
+  // Booking Flow
   bookingStart: "/booking/start",
   bookingVerifyOtp: "/booking/verify-otp",
   bookingMyBookings: "/booking/my-bookings",
@@ -18,6 +20,8 @@ export const routes = {
   bookingCancel: (bookingId: string) => `/booking/manage/${bookingId}/cancel`,
   bookingCancelSubmitted: (bookingId: string) =>
     `/booking/manage/${bookingId}/cancel/submitted`,
+
+
   gallery: "/gallery",
   contact: "/contact",
   privacyPolicy: "/privacy-policy",
